@@ -7,17 +7,17 @@ const initChatRoomEvents = (io, socket) => {
     io.to(room).emit('server-send-message', message);
   })
 
-  socket.on('client-create-room', (roomName) => {
+  socket.on('client-create-room', ({roomName, user}) => {
     let newRoom = addChatRoom(roomName);
-    socket.join(roomName);
+    socket.join(roomName, user);
     socket.roomName = roomName;
     if(newRoom) io.emit('server-room-created', getChatRooms());
     else socket.emit('server-room-duplicate', getChatRooms());
   })
 
-  socket.on('client-join-room', (roomName) => {
+  socket.on('client-join-room', ({roomName, user}) => {
     socket.join(roomName);
-    userJoinChatRoom(roomName, socket.id);
+    userJoinChatRoom(roomName, user);
     socket.roomName = roomName;
     socket.emit('server-room-joined', roomName);
     socket.broadcast.to(roomName).emit('server-user-joined-room', getChatRooms());
