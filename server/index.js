@@ -37,14 +37,14 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler);
 
 io.on('connection', (socket) => {
-    dev.log(`[${moment().format(date_time_format[0])}] client connected : ${socket.id}`)
+    console.log(`[${moment().format(date_time_format[0])}] client connected : ${socket.id}`)
     
     //TODO: Init Event Listeners
     
     // use log middleware
-    if(config.inDev){
+    if(true){
         socket.use(([event, ...args], next) => {
-        dev.log(`[${moment().format(date_time_format[0])}] ${event} : ${socket.id}`)
+        console.log(`[${moment().format(date_time_format[0])}] ${event} : ${socket.id}`)
         next();
         });
     }        
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', ()=> {
         let room_id = socket.hasOwnProperty('roomId') ?  socket.roomId : 'unknown'
-        dev.log(`[${moment().format(date_time_format[0])}] client disconnected : ${socket.id} from room ${room_id}`)
+        console.log(`[${moment().format(date_time_format[0])}] client disconnected : ${socket.id} from room ${room_id}`)
         
     })
 
