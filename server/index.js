@@ -7,6 +7,9 @@ const { Server } = require("socket.io");
 const { createServer } = require("http");
 const moment = require("moment");
 const { date_time_format } = require("./utils/Utils");
+const { newUserConnect, getUser, userDisconnect } = require('./db/user');
+const { initChatRoomEvents, initUserEvents } = require("./mysocketio");
+const { userLeaveChatRoom, getChatRooms } = require("./db/chatroom");
 
 dotenv.config();
 
@@ -38,8 +41,10 @@ app.use(errorHandler);
 
 io.on('connection', (socket) => {
     console.log(`[${moment().format(date_time_format[0])}] client connected : ${socket.id}`)
-    
+
     //TODO: Init Event Listeners
+    initChatRoomEvents(io, socket);
+    initUserEvents(io, socket);
     
     // use log middleware
     if(true){
@@ -56,16 +61,18 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', ()=> {
+        userDisconnect(socket.id);
         let room_id = socket.hasOwnProperty('roomId') ?  socket.roomId : 'unknown'
+        userLeaveChatRoom(socket.roomName, socket.id)
         console.log(`[${moment().format(date_time_format[0])}] client disconnected : ${socket.id} from room ${room_id}`)
-        
     })
 
     // event listeners have been initialized and ready to go
     socket.emit('ready', {
         message : "ready to go",
+        chatrooms : getChatRooms(),
         mySocketId : socket.id
-    })  
+    })
 })
 
 const PORT = process.env.PORT || 2001;
@@ -74,7 +81,6 @@ server.listen(PORT, ()=> {
     console.log(`server running on port ${PORT}...`)
     console.log(moment().format(date_time_format[0]))
 })
-
 
 //connect mongodb atlas
 const mongo_uri = process.env.MONGODB_URI;
@@ -89,3 +95,6 @@ mongoose.connect(
 mongoose.connection.on("error", (err) => {
   console.error("MongoDB error", err);
 });
+
+exports.app = app;
+exports.io = io;
