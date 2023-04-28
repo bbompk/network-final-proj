@@ -3,6 +3,8 @@ import { TextField, Button } from "@mui/material"
 import { useUser } from "../UserProvider"
 import { useNavigate } from "react-router-dom";
 
+import "../../Login.css";
+
 export function Login() {
   const { setUsername } = useUser();
   const [ usernameInput, setUsernameInput ] = useState<string>("");
@@ -25,19 +27,23 @@ export function Login() {
     goToChatRoomPage();
   }
 
-  return <>
-    <div className="flex items-center justify-center w-screen h-screen">
-      <div className="w-1/2 min-w-min max-w-md flex flex-col p-5 rounded bg-white">
-        <h3 className="text-xl">Username</h3>
-        <TextField 
-          autoComplete="off" 
-          value={usernameInput} 
-          onChange={(e) => {setUsernameInput(e.target.value)}}
+  return (
+    <div className="login-page-container">
+      <div className="login-form">
+        <h3>Username</h3>
+        <TextField
+          autoComplete="off"
+          value={usernameInput}
+          onChange={(e) => {
+            setUsernameInput(e.target.value);
+          }}
         ></TextField>
         <span className="text-red-600">{errorMessage}</span>
-        <h3 className="text-xl">Profile Picture</h3>
-        <Button variant="contained" onClick={onClick}>Start Chatting!</Button>
+        <h3>Profile Picture</h3>
+        <Button variant="contained" onClick={onClick}>
+          Start Chatting!
+        </Button>
       </div>
     </div>
-  </>
+  );
 }
