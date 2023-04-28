@@ -1,13 +1,6 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { io } from 'socket.io-client'
-
-import { LoginPage } from './Page/LoginPage'
-import { ChatRoomPage } from './Page/ChatRoomPage'
-
-import { UserProvider, useUser } from './components/UserProvider'
 
 function App() {
   const [pageIndex, setPageIndex] = useState<number>(0);
@@ -20,13 +13,7 @@ function App() {
   }
     return (
     <>
-    <UserProvider>
-      {
-        pageIndex===0 
-        ? <LoginPage/>
-        : <ChatRoomPage/>
-      }
-    </UserProvider>
+      <div></div>
     </>
   )
 }

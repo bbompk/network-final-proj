@@ -1,10 +1,12 @@
-import { useUser } from "../components/UserProvider"
+import { UserProvider } from "../components/UserProvider";
+import { ChatRoom } from "../components/pages/ChatRoom";
 
-export function ChatRoomPage() {
-  const { username } =useUser();
-  console.log(username)
-
-  return <>
-    Chat Room 
-  </>
+export default function ChatRoomPage() {
+    return (
+        <>
+            <UserProvider>
+                <ChatRoom/>
+            </UserProvider>
+        </>
+    )
 }

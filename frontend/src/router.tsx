@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
-import { ChatRoomPage } from './Page/ChatRoomPage.tsx'
-import { LoginPage } from './Page/LoginPage.tsx'
+import ChatRoomPage from './Page/ChatRoomPage.tsx'
+import LoginPage from './Page/LoginPage.tsx'
 
 const router = createBrowserRouter([
     {
