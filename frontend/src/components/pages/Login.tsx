@@ -28,21 +28,27 @@ export function Login() {
   }
 
   return (
-    <div className="login-page-container">
-      <div className="login-form">
-        <h3>Username</h3>
-        <TextField
-          autoComplete="off"
-          value={usernameInput}
-          onChange={(e) => {
-            setUsernameInput(e.target.value);
-          }}
-        ></TextField>
-        <span className="text-red-600">{errorMessage}</span>
-        <h3>Profile Picture</h3>
-        <Button variant="contained" onClick={onClick}>
+    <div className="login-page">
+      <div className="login-container">
+        <img
+          className="login-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+          alt="logo"
+        />
+        <h2 className="login-title">Login to Your Account</h2>
+        <form className="login-form">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={usernameInput}
+            onChange={(e) => setUsernameInput(e.target.value)}
+          />
+          <span className="login-error">{errorMessage}</span>
+          <Button variant="contained" onClick={onClick}>
           Start Chatting!
-        </Button>
+          </Button>
+        </form>
       </div>
     </div>
   );
