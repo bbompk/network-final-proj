@@ -6,7 +6,7 @@ export interface AuthorInterface {
 export interface MessageInterface {
     author?: AuthorInterface;
     message?: string;
-    timestamp?: string;
+    timestamp?: string | Date;
     isSticker?: boolean;
     sticker?: number;
 }
