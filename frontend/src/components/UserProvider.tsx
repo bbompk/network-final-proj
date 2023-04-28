@@ -13,10 +13,10 @@ export const UserProvider = ({ children }: Props) => {
 
   useEffect(()=>{
     if(sessionStorage.getItem('username') !== null){
-      setUsername(JSON.parse(sessionStorage.getItem('username')!));
+      setUsername(sessionStorage.getItem('username')!);
     }
     if(sessionStorage.getItem('room') !== null){
-      setRoom(JSON.parse(sessionStorage.getItem('room')!));
+      setRoom(sessionStorage.getItem('room')!);
     }
   },[])
 
