@@ -9,6 +9,7 @@ export function Login() {
   const { setUsername } = useUser();
   const [ usernameInput, setUsernameInput ] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("")
+  const [selectedImage, setSelectedImage] = useState<string>("https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png")
   const navigate = useNavigate();
 
   const goToChatRoomPage = () => {
@@ -27,14 +28,41 @@ export function Login() {
     goToChatRoomPage();
   }
 
+  const selectProfile = () => {
+    const fileInput = window.open('', 'fileInput', 'width=400,height=400');
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    console.log("I am choosing profile!")
+    
+    // Displaying a preview image
+    input.addEventListener('change', () => {
+      const file = input.files && input.files[0];
+      if (fileInput && fileInput.document && file) {
+        console.log('Selected file:', file);
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target?.result as string;
+          setSelectedImage(img.src)
+        };
+        reader.readAsDataURL(file);
+      }
+      fileInput.close();
+    });
+    fileInput.document.body.appendChild(input);
+    input.click();
+  };
+
   return (
     <div className="login-page">
       <div className="login-container">
-        <img
-          className="login-logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-          alt="logo"
-        />
+        <div className="login-logo" onClick={selectProfile}>
+          <img
+            src={selectedImage}
+            alt="logo"
+          />
+        </div>
         <h2 className="login-title">Login to Your Account</h2>
         <form className="login-form">
           <label htmlFor="username">Username</label>
