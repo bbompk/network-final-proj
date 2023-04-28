@@ -32,6 +32,11 @@ const initChatRoomEvents = (io, socket) => {
     socket.emit('server-room-left', { roomName });
     socket.broadcast.to(roomName).emit('server-user-left-room', { data: getChatRooms() });
   })
+
+  socket.on('client-send-dm', ({message, receiverId}) => {
+    message.timestamp = Date.now();
+    socket.to(receiverId).emit('server-send-dm', message);
+  })
 }
 
 const initUserEvents = (io, socket) => {
