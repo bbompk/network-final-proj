@@ -23,7 +23,7 @@ function App() {
     <UserProvider>
       {
         pageIndex===0 
-        ? <LoginPage goToChatRoomPage={goToChatRoomPage}/>
+        ? <LoginPage/>
         : <ChatRoomPage/>
       }
     </UserProvider>

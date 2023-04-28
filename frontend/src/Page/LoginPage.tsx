@@ -1,11 +1,17 @@
 import { useState } from "react"
 import { TextField, Button } from "@mui/material"
 import { useUser } from "../components/UserProvider"
+import { useNavigate } from "react-router-dom";
 
-export function LoginPage({goToChatRoomPage}:{goToChatRoomPage:()=>void}) {
+export function LoginPage() {
   const { setUsername } = useUser();
   const [ usernameInput, setUsernameInput ] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("")
+  const navigate = useNavigate();
+
+  const goToChatRoomPage = () => {
+    navigate("/chat");
+  }
 
   const onClick = () => {
     if(usernameInput===""){
