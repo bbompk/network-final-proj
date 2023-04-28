@@ -8,14 +8,14 @@ class User {
 
 var users = [];
 
-const newUserConnect = (socket, id, name, avatar) => {
+const newUserConnect = (id, name, avatar) => {
     if(users.find((user) => user.id === id) != undefined) return undefined
     const user = new User(id, name, avatar)
     users.push(user);
     return user;
 };
 
-const getUser = (socket, id) => {
+const getUser = (id) => {
     return users.find((user) => user.id === id);
 }
 
@@ -33,5 +33,7 @@ const userDisconnect = (socket, id) => {
 module.exports = {
     newUserConnect,
     getUser,
-    userDisconnect
+    userDisconnect,
+    getAllUsers,
+    User, 
 }
