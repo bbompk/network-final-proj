@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 const { createServer } = require("http");
 const moment = require("moment");
 const { date_time_format } = require("./utils/Utils");
-const { newUserConnect, getUser, userDisconnect } = require('./db/user');
+const { newUserConnect, getUser, userDisconnect, getAllUsers } = require('./db/user');
 const { initChatRoomEvents, initUserEvents } = require("./mysocketio");
 const { userLeaveChatRoom, getChatRooms } = require("./db/chatroom");
 

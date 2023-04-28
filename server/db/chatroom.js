@@ -1,3 +1,10 @@
+class ChatRoom {
+    constructor(roomName, users) {
+        this.roomName = roomName;
+        this.users = users;
+    }
+}
+
 var chatrooms = [];
 
 const addChatRoom =  (roomName) => {
@@ -45,5 +52,6 @@ module.exports = {
     removeChatRoom,
     userJoinChatRoom,
     userLeaveChatRoom,
-    getChatRooms
+    getChatRooms,
+    ChatRoom,
 }
