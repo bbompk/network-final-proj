@@ -17,7 +17,7 @@ export function ChatRoom() {
         <RoomListContainer/>
         <div style={{display:"flex, flexDirection:column", flexGrow:1, backgroundColor:"lightblue"}}>
           <ChatRoomContainer/>
-          <StickerSelector onSelect={(sticker: number) => {sticker;}} show={true}/>
+          <StickerSelector onSelect={(sticker: number) => {console.log(sticker);}} show={true}/>
         </div>
         <UserListContainer/>
       </div>
