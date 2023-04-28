@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "../../Login.css";
 
 export function Login() {
-  const { setUsername } = useUser();
+  const { changeUsername } = useUser();
   const [openModal, setOpenModal] = useState(false);
   const [usernameInput, setUsernameInput ] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("")
@@ -31,8 +31,8 @@ export function Login() {
       setErrorMessage("Please enter your username!")
       return;
     }
-    if(!setUsername)return;
-    setUsername(usernameInput)
+    if(!changeUsername)return;
+    changeUsername(usernameInput)
     console.log("i amk navigatinggggg")
     goToChatRoomPage();
   }

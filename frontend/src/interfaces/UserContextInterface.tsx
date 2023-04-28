@@ -1,6 +1,6 @@
 export interface UserContextInterface {
   username?: string;
-  setUsername?: React.Dispatch<React.SetStateAction<string>>
+  changeUsername?:  (newName:string)=>void;
   room?: string;
-  setRoom?: React.Dispatch<React.SetStateAction<string>>
+  changeRoom?: (newRoom:string)=>void;
 }
