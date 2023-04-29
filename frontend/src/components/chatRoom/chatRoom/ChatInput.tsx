@@ -48,7 +48,16 @@ export default function ChatInput () {
     return (<div>
         <StickerSelector onSelect={handleSendSticker} show={showStickerSelector} className="realtive"/>
         <div className="flex flex-row gap-6 justify-center w-full p-4 pb-6 bg-gray-600">
-            <textarea id="input-message" rows={1} className="flex  flex-grow w-ull p-2 rounded-md bg-gray-300" />
+            <textarea 
+            id="input-message" rows={1} 
+            className="flex  flex-grow w-ull p-2 rounded-md bg-gray-300" 
+            onKeyDown={(e) => {
+                if(e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMsg()
+                }
+            }}
+            />
             <button onClick={handleSendMsg}> 
                 <FontAwesomeIcon icon={faPaperPlane} className="text-2xl text-gray-400 hover:text-gray-700 hover:cursor-pointer" />
             </button>
