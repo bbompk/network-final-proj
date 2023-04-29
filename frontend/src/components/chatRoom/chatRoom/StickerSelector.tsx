@@ -1,4 +1,4 @@
-import { stickers_url } from "../../data/Sticker";
+import { stickers_url } from "../../../data/Sticker";
 
 interface StickerSelectorProps {
     onSelect: (sticker: number) => void,

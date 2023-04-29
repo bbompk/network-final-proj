@@ -1,10 +1,10 @@
 import { useUser } from "../UserProvider"
 import { useEffect, useState } from "react";
 import { TopBar } from "../chatRoom/TopBar";
-import { RoomListContainer } from "../chatRoom/RoomListContainer";
-import { ChatRoomContainer } from "../chatRoom/ChatRoomContainer";
-import { UserListContainer } from "../chatRoom/UserListContainer";
-import { StickerSelector } from "../chatRoom/StickerSelector";
+import { RoomListContainer } from "../chatRoom/roomList/RoomListContainer";
+import { ChatRoomContainer } from "../chatRoom/chatRoom/ChatRoomContainer";
+import { UserListContainer } from "../chatRoom/userList/UserListContainer";
+import { StickerSelector } from "../chatRoom/chatRoom/StickerSelector";
 import { io } from "socket.io-client";
 import { ChatRoomInterface } from "../../interfaces/ChatRoomInterface";
 

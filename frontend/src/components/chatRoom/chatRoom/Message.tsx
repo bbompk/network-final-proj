@@ -1,7 +1,7 @@
-import { MessageInterface } from "../../interfaces/MessageInterface";
-import { stickers_url } from "../../data/Sticker";
-import { avatars_url } from "../../data/Avatar";
-import { dateToTimeString } from "../../utils/Utils";
+import { MessageInterface } from "../../../interfaces/MessageInterface";
+import { stickers_url } from "../../../data/Sticker";
+import { avatars_url } from "../../../data/Avatar";
+import { dateToTimeString } from "../../../utils/Utils";
 
 interface Props {
     msg: MessageInterface,
