@@ -41,6 +41,9 @@ export const SocketProvider = ({ children }: Props) => {
         name:username,
         avatar:avatarIndex,
       })
+      if(room && room!==""){
+        joinRoom(room);
+      }
     });
 
     // catch new user join server
@@ -77,6 +80,7 @@ export const SocketProvider = ({ children }: Props) => {
       console.log(`join room ${roomName} success!`);
       if(!changeRoom)return;
       changeRoom(roomName);
+      setMessages([]);
     })
 
     // catch user leave room
