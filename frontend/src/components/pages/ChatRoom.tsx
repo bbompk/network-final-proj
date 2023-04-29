@@ -19,14 +19,14 @@ export function ChatRoom() {
     });
 
     setSocket(s);
-  }, [])
+  }, [username])
 
   return <>
     <div style={{display:"flex", flexDirection:"column", height:"100vh"}}>
       <TopBar/>
-      <div style={{display:"flex", flexDirection:"row", flexGrow:1}}>
+      <div style={{display:"flex", flexDirection:"row", height:"calc(100vh - 3rem)"}}>
         <RoomListContainer/>
-        <div style={{display:"flex, flexDirection:column", flexGrow:1, backgroundColor:"lightblue"}}>
+        <div style={{display:"flex", flexDirection:"column", flexGrow:1, backgroundColor:"lightblue"}}>
           <ChatRoomContainer/>
           <StickerSelector onSelect={(sticker: number) => {console.log(sticker);}} show={true}/>
         </div>
