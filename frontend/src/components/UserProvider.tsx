@@ -10,6 +10,7 @@ interface Props {
 export const UserProvider = ({ children }: Props) => {
   const [username, setUsername] = useState<string>("");
   const [room, setRoom] = useState<string>("");
+  const [avatarIndex, setAvatarIndex] = useState<number>(0);
 
   useEffect(()=>{
     if(sessionStorage.getItem('username') !== null){
@@ -17,6 +18,9 @@ export const UserProvider = ({ children }: Props) => {
     }
     if(sessionStorage.getItem('room') !== null){
       setRoom(sessionStorage.getItem('room')!);
+    }
+    if(sessionStorage.getItem('avatarIndex') !== null){
+      setAvatarIndex(Number(sessionStorage.getItem('avatarIndex')!));
     }
   },[])
 
@@ -30,8 +34,13 @@ export const UserProvider = ({ children }: Props) => {
     sessionStorage.setItem('room', newRoom)
   }
 
+  function changeAvatarIndex(newAvatarIndex:number) {
+    setAvatarIndex(newAvatarIndex);
+    sessionStorage.setItem('avatarIndex', String(newAvatarIndex))
+  }
+
   return (
-    <UserContext.Provider value={{username, changeUsername, room, changeRoom}}>
+    <UserContext.Provider value={{username, changeUsername, room, changeRoom, avatarIndex, changeAvatarIndex}}>
       {children}
     </UserContext.Provider>
   )

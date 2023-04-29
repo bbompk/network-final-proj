@@ -7,11 +7,10 @@ import { avatars_url } from "../../data/Avatar";
 import "./Login.css";
 
 export function Login() {
-  const { changeUsername } = useUser();
+  const { changeUsername, avatarIndex, changeAvatarIndex} = useUser();
   const [openModal, setOpenModal] = useState(false);
   const [usernameInput, setUsernameInput ] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("")
-  const [selectedImage, setSelectedImage] = useState<string>("https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png")
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
 
   const goToChatRoomPage = () => {
@@ -38,8 +37,9 @@ export function Login() {
     setOpenModal(false);
   };
 
-  const handleSelectProfileImage = (image: string) => {
-    setSelectedImage(image);
+  const handleSelectProfileImage = (avatarIndex: number) => {
+    if(!changeAvatarIndex)return;
+    changeAvatarIndex(avatarIndex);
     handleCloseModal();
   };
 
@@ -48,7 +48,7 @@ export function Login() {
       <div className="login-container">
         <div className="login-logo" onClick={handleOpenModal}>
           <img
-            src={selectedImage}
+            src={avatars_url[avatarIndex||0]}
             alt="logo"
           />
         </div>
@@ -56,9 +56,9 @@ export function Login() {
           <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 400, bgcolor: "background.paper", borderRadius: "10px", boxShadow: 24, p: 4 }}>
             <h2 className="login-title">Choose Profile Picture</h2>
             <Grid container spacing={2}>
-              {avatars_url.map((image) => (
-                <Grid item xs={6} key={image}>
-                  <IconButton onClick={() => handleSelectProfileImage(image)}>
+              {avatars_url.map((image,index) => (
+                <Grid item xs={6} key={index}>
+                  <IconButton onClick={() => handleSelectProfileImage(index)}>
                     <img src={image} alt={image} style={{ width: "100%", height: "auto" }} />
                   </IconButton>
                 </Grid>

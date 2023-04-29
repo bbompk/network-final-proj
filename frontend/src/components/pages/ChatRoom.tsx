@@ -6,16 +6,19 @@ import { ChatRoomContainer } from "../chatRoom/ChatRoomContainer";
 import { UserListContainer } from "../chatRoom/UserListContainer";
 import { StickerSelector } from "../chatRoom/StickerSelector";
 import { io } from "socket.io-client";
+import { ChatRoomInterface } from "../../interfaces/ChatRoomInterface";
 
 export function ChatRoom() {
-  const { username } = useUser();
+  const { username, avatarIndex } = useUser();
   const [socket, setSocket] = useState<any>(null);
 
   useEffect(() => {
     console.log(username);
+    console.log(avatarIndex);
     const s = io("http://localhost:2001", { transports: ["websocket"] });
-    s.on("ready", () => {
-      console.log("connected");
+
+    s.on("ready", ({chatRooms, mySocketId}:{chatRooms:ChatRoomInterface[], mySocketId:string}) => {
+      console.log(chatRooms);
     });
 
     setSocket(s);
