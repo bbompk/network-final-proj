@@ -3,10 +3,10 @@ const { addChatRoom, removeChatRoom, userJoinChatRoom, userLeaveChatRoom, getCha
 
 const initChatRoomEvents = (io, socket) => {
   socket.on('client-send-message', ({message, roomName}) => {
-    console.log(message);
+    console.log(message, roomName);
     message.timestamp = Date.now();
-    if(!roomName) io.emit('server-send-message', message);
-    else io.to(roomName).emit('server-send-message', message);
+    if(roomName) io.to(roomName).emit('server-send-message', message);
+    //else io.emit('server-send-message', message);
   })
 
   socket.on('client-create-room', ({roomName, user}) => {
@@ -32,8 +32,11 @@ const initChatRoomEvents = (io, socket) => {
   })
 
   socket.on('client-send-dm', ({message, receiverId}) => {
+    console.log(message, receiverId)
+    console.log(getAllUsers())
     message.timestamp = Date.now();
-    socket.to(receiverId).emit('server-send-dm', message);
+    io.to(receiverId).emit('server-send-dm', {message, senderId: socket.id});
+    socket.emit('server-echoe-dm', message);
   })
 }
 

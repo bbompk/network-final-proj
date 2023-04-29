@@ -65,12 +65,13 @@ io.on('connection', (socket) => {
         let room_id = socket.hasOwnProperty('roomId') ?  socket.roomId : 'unknown'
         userLeaveChatRoom(socket.roomName, socket.id)
         console.log(`[${moment().format(date_time_format[0])}] client disconnected : ${socket.id} from room ${room_id}`)
-        io.emit('server-user-disconnected', { data: getAllUsers() })
+        io.emit('server-user-disconnected', { data: getUser(socket.id) })
     })
 
     // event listeners have been initialized and ready to go
     socket.emit('ready', {
         chatRooms : getChatRooms(),
+        users: getAllUsers(),
         mySocketId : socket.id
     })
 })

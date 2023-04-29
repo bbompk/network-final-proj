@@ -1,7 +1,7 @@
 import { MessageInterface } from "../../../interfaces/MessageInterface";
 import { stickers_url } from "../../../data/Sticker";
 import { avatars_url } from "../../../data/Avatar";
-import { dateToTimeString } from "../../../utils/Utils";
+import { dateToDateString, dateToTimeString } from "../../../utils/Utils";
 import Markdown from "./MarkdownedText";
 
 interface Props {
@@ -19,8 +19,11 @@ export default function Message({ msg } : Props) {
                     <span className="text-md font-bold mr-2 ">
                         {msg.author?.name}
                     </span>
-                    <span className="text-[10px] text-gray-500 pt-[5px]">
-                        {dateToTimeString(new Date(msg.timestamp ?? 0))}
+                    <span className="text-[10px] text-gray-500 mr-px pt-[4px]">
+                        {dateToDateString(new Date(msg.timestamp ?? 0))}
+                    </span>
+                    <span className="text-[10px] text-gray-500 pt-[4px]">
+                        {`at ${dateToTimeString(new Date(msg.timestamp ?? 0))}`}
                     </span>
                 </div> 
                 <div className="flex w-full">

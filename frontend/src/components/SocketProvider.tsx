@@ -19,6 +19,8 @@ export const SocketProvider = ({ children }: Props) => {
   const [ chatRooms, setChatRooms] = useState<ChatRoomInterface[]>([]);
   const [ messages, setMessages] = useState<MessageInterface[]>([]);
   const [ users, setUsers] = useState<UserInterface[]>([]);
+  const [isDmRoom, setIsDmRoom] = useState<boolean>(false);
+  const [notiDm, setNotiDm] = useState<MessageInterface>();
 
   useEffect(()=>{
     console.log(username)
@@ -42,7 +44,8 @@ export const SocketProvider = ({ children }: Props) => {
         avatar:avatarIndex,
       })
       if(room && room!==""){
-        joinRoom(room);
+        if(changeRoom) changeRoom("");
+        //joinRoom(room);
       }
     });
 
@@ -50,6 +53,8 @@ export const SocketProvider = ({ children }: Props) => {
     socket.on("server-new-user",({data}:{data:UserInterface[]})=>{
       console.log("new user join the server!")
       setUsers(data);
+      //console.log(data)
+      //console.log(users)
     })
 
     // catch user disconnected
@@ -102,6 +107,18 @@ export const SocketProvider = ({ children }: Props) => {
       setMessages((messages)=>[...messages, message]);
     })
 
+    socket.on("server-send-dm", ({message, senderId}: {message:MessageInterface, senderId:string})=>{
+      console.log(`new dm!`)
+      if(room == senderId) setMessages((messages)=>[...messages, message]);
+      else if(socket.id!=senderId) setNotiDm(message);
+    })
+
+    socket.on("server-echoe-dm", (message:MessageInterface)=>{
+      console.log(`echoe dm!`);
+      setMessages((messages)=>[...messages, message]);
+    })
+
+
     return ()=>{
       socket.off("ready");
       socket.off("server-new-user");
@@ -113,8 +130,11 @@ export const SocketProvider = ({ children }: Props) => {
       socket.off("server-user-left-room");
       socket.off("server-room-left");
       socket.off("server-send-message");
+      socket.off("server-send-dm");
+      socket.off("server-echoe-dm");
     }
-  }, [socket])
+  }, [socket,room])
+
 //
   function createRoom(roomName:string){
     console.log(`create room ${roomName}...`)
@@ -136,6 +156,19 @@ export const SocketProvider = ({ children }: Props) => {
         avatar:avatarIndex
       }
     })
+    setIsDmRoom(false);
+  }
+
+  function checkDm(roomName:string){
+    console.log(`check dm ${roomName}...`)
+    socket.emit("client-join-room", {
+      roomName,
+      user:{
+        name:username,
+        avatar:avatarIndex
+      }
+    })
+    setIsDmRoom(true);
   }
 
   function leaveRoom(){
@@ -147,18 +180,23 @@ export const SocketProvider = ({ children }: Props) => {
         avatar:avatarIndex
       }
     })
+    setIsDmRoom(false);
   }
 
   function sendMessage(message:MessageInterface){
     console.log(`send message in ${room}...`)
-    socket.emit("client-send-message", {
+    if(!isDmRoom) socket.emit("client-send-message", {
       message,
       roomName:room,
-    })
+    });
+    else socket.emit("client-send-dm", {
+      message,
+      receiverId:room,
+    });
   }
 
   return (
-    <SocketContext.Provider value={{socket, chatRooms, users, messages, createRoom, joinRoom, leaveRoom, sendMessage}}>
+    <SocketContext.Provider value={{socket, chatRooms, users, messages, createRoom, joinRoom, leaveRoom, sendMessage, checkDm, isDmRoom, notiDm}}>
       {children}
     </SocketContext.Provider>
   )
