@@ -4,7 +4,7 @@ import { useUser } from "../UserProvider"
 import { useNavigate } from "react-router-dom";
 import { avatars_url } from "../../data/Avatar";
 
-import "../../Login.css";
+import "./Login.css";
 
 export function Login() {
   const { changeUsername } = useUser();
