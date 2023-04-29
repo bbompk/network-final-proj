@@ -1,4 +1,3 @@
-import { ChatRoomInterface } from "../../../interfaces/ChatRoomInterface"
 import { useSocket } from "../../SocketProvider"
 
 export function RoomListContainer() {
