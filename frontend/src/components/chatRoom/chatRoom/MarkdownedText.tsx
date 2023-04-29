@@ -7,7 +7,7 @@ const Markdown = ({text}: {text:string}) => {
     let texts = txt.split('\n');    
     for(let i=0; i < texts.length; i++) {
       result.push(<span key={i}>{texts[i]}</span>);
-      result.push(<br key={i+texts.length}/>);
+      if(i != texts.length-1) result.push(<br key={i+texts.length}/>);
     }
     return result
   }
