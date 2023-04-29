@@ -1,20 +1,13 @@
 import Message from "./Message"
+import { useSocket } from "../../SocketProvider"
 
 export function ChatRoomContainer() {
+  const { messages } = useSocket();
   return <>
   <div style={{minWidth:"20rem", flex:"1 1 auto", backgroundColor:"lightblue", overflowY:"auto"}}>
-    <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit e**sse fugiat occaecat la**boris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-        <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-            <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esseat "}}/>
-                <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                    <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                        <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                            <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                                <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                                    <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                                        <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-                                            <Message msg={{author:{name:"Tourist", avatar:1}, timestamp:new Date(), message:"Occaecat culpa enim elit esse fugiat occaecat laboris. Anim dolore elit velit occaecat. Commodo Lorem ipsum nostrud cupidatat dolor occaecat aliquip dolore reprehenderit voluptate est consectetur ex nisi. Eiusmod adipisicing Lorem sint nulla."}}/>
-    <Message msg={{author:{name:"Guide", avatar:2}, timestamp:new Date(), isSticker:true, sticker:1}}/>
+    {messages?.map((msg, idx) => (
+        <Message key={idx} msg={msg}/>
+    ))}
   </div>
   </>
 }

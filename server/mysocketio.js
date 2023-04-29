@@ -5,7 +5,8 @@ const initChatRoomEvents = (io, socket) => {
   socket.on('client-send-message', ({message, roomName}) => {
     console.log(message);
     message.timestamp = Date.now();
-    io.to(roomName).emit('server-send-message', message);
+    if(!roomName) io.emit('server-send-message', message);
+    else io.to(roomName).emit('server-send-message', message);
   })
 
   socket.on('client-create-room', ({roomName, user}) => {

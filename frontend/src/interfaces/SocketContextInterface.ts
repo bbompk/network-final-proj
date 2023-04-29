@@ -10,5 +10,5 @@ export interface SocketContextInterface {
   createRoom?: (roomName:string)=>void;
   joinRoom?: (roomName:string)=>void;
   leaveRoom?: ()=>void;
-  sendMessage?:(message:string)=>void;
+  sendMessage?:(message:MessageInterface)=>void;
 }

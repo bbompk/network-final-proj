@@ -5,6 +5,7 @@ import { RoomListContainer } from "../chatRoom/roomList/RoomListContainer";
 import { ChatRoomContainer } from "../chatRoom/chatRoom/ChatRoomContainer";
 import { UserListContainer } from "../chatRoom/userList/UserListContainer";
 import { StickerSelector } from "../chatRoom/chatRoom/StickerSelector";
+import ChatInput from "../chatRoom/chatRoom/ChatInput";
 
 export function ChatRoom() {
   return <>
@@ -14,7 +15,7 @@ export function ChatRoom() {
         <RoomListContainer/>
         <div style={{display:"flex", flexDirection:"column", flexGrow:1, backgroundColor:"lightblue"}}>
           <ChatRoomContainer/>
-          <StickerSelector onSelect={(sticker: number) => {console.log(sticker);}} show={true} className="realtive"/>
+          <ChatInput/>
         </div>
         <UserListContainer/>
       </div>

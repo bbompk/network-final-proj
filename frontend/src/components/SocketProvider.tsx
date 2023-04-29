@@ -145,7 +145,7 @@ export const SocketProvider = ({ children }: Props) => {
     })
   }
 
-  function sendMessage(message:string){
+  function sendMessage(message:MessageInterface){
     console.log(`send message in ${room}...`)
     socket.emit("client-send-message", {
       message,
