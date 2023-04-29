@@ -9,7 +9,7 @@
 
 .login-container {
     min-height: 35vh;
-    width: 27rem;
+    width: 24rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,11 +24,14 @@
 .login-logo {
     width: 30%;
     height: 30%;
-    /* border-radius: 50%;
-    border: 2px solid white; */
-    /* box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3); */
+    /* border-collapse: separate;
+    border-spacing: 3px; */
+    padding: 8px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
     background-color: transparent;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     /* transform: translateY(-60%); */
 }
 
