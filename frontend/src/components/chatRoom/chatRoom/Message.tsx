@@ -2,6 +2,7 @@ import { MessageInterface } from "../../../interfaces/MessageInterface";
 import { stickers_url } from "../../../data/Sticker";
 import { avatars_url } from "../../../data/Avatar";
 import { dateToTimeString } from "../../../utils/Utils";
+import Markdown from "./MarkdownedText";
 
 interface Props {
     msg: MessageInterface,
@@ -29,7 +30,7 @@ export default function Message({ msg } : Props) {
                             <img src={stickers_url[msg.sticker ?? 0]} alt="sticker" className="w-[120px] h-[120px]" />
                         </div> 
                         : <div className="flex w-fit p-2 px-6 rounded-md text-sm bg-gray-400">
-                            {msg.message}
+                            <Markdown text={msg.message ?? ""}/>
                         </div>
                     }
                 </div>
