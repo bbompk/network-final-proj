@@ -25,10 +25,10 @@ export default function Message({ msg } : Props) {
                 <div className="flex w-full">
                     {
                         msg.isSticker 
-                        ? <div className="flex w-full p-2 px-4  bg-gray-400">
+                        ? <div className="flex w-fit p-2 px-4 rounded-md  bg-gray-400">
                             <img src={stickers_url[msg.sticker ?? 0]} alt="sticker" className="w-[120px] h-[120px]" />
                         </div> 
-                        : <div className="flex w-full p-2 px-6  text-sm bg-gray-400">
+                        : <div className="flex w-fit p-2 px-6 rounded-md text-sm bg-gray-400">
                             {msg.message}
                         </div>
                     }
