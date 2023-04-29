@@ -17,7 +17,7 @@ const initChatRoomEvents = (io, socket) => {
 
   socket.on('client-join-room', ({roomName, user}) => {
     socket.join(roomName);
-    userJoinChatRoom(roomName, new User(socket.id, ...user));
+    userJoinChatRoom(roomName, new User(socket.id, user.name, user.avatar));
     socket.roomName = roomName;
     socket.emit('server-room-joined', { roomName });
     socket.broadcast.to(roomName).emit('server-user-joined-room', { data: getChatRooms() });
