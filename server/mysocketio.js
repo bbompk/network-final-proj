@@ -11,9 +11,6 @@ const initChatRoomEvents = (io, socket) => {
 
   socket.on('client-create-room', ({roomName, user}) => {
     let newRoom = addChatRoom(roomName);
-    if(newRoom) userJoinChatRoom(roomName, new User(socket.id, ...user));
-    socket.join(roomName);
-    socket.roomName = roomName;
     if(newRoom) io.emit('server-room-created', { data: getChatRooms() });
     else socket.emit('server-room-duplicate', { data: getChatRooms() });
   })
