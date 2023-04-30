@@ -7,7 +7,8 @@ import { useSocket } from "../../SocketProvider"
 import { MessageInterface } from "../../../interfaces/MessageInterface";
 import styled from "@emotion/styled";
 
-const backgroundColor = "black";
+// const backgroundColor = "#f9fafb";
+const backgroundColor = "#1A202C";
 
 // border-top: 1px solid #d1d5db;
 const Container = styled("div")`
