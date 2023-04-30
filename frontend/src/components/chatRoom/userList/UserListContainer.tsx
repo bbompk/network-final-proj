@@ -7,9 +7,8 @@ import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from
 
 const UserListContainerWrapper = styled('div')(({ theme }) => ({
   height: "100%",
-  width: "20%",
-  minWidth: "17rem",
-  maxWidth: "20rem",
+  minWidth: "17vw",
+  maxWidth: "20vw",
   padding: "14px 9px",
   backgroundColor: "#F3F4F6",
   flex: "1 1 auto",
