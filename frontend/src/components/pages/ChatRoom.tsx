@@ -26,7 +26,7 @@ export function ChatRoom() {
   return <>
     <div style={{display:"flex", flexDirection:"column", height:"100vh", position:"relative"}}>
       {/* <TopBar/> */}
-      <div style={{display:"flex", flexDirection:"row", height:"calc(100vh)"}}>
+      <div style={{display:"flex", flexDirection:"row", height:"100vh"}}>
         <RoomListContainer/>
         <div style={{display:"flex", flexDirection:"column", flexGrow:1, backgroundColor:"lightblue"}}>
           <div>
@@ -37,7 +37,7 @@ export function ChatRoom() {
           <ChatRoomContainer/>
           <ChatInput/>
         </div>
-        <div style={{display:"flex", flexDirection:"column"}}>
+        <div style={{display:"flex", flexDirection:"column", height:"100vh"}}>
           <TopBar/>
           <UserListContainer/>
         </div>
