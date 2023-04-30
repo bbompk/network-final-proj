@@ -2,6 +2,19 @@ import { avatars_url } from "../../../data/Avatar";
 import { useSocket } from "../../SocketProvider"
 import { UserInterface } from "../../../interfaces/UserInterface";
 import { useUser } from "../../UserProvider";
+import { styled } from "@mui/material/styles";
+import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
+
+const UserListContainerWrapper = styled('div')(({ theme }) => ({
+  height: "100%",
+  width: "20%",
+  minWidth: "15rem",
+  maxWidth: "20rem",
+  padding: "14px 9px",
+  backgroundColor: "#F3F4F6",
+  flex: "1 1 auto",
+  overflowY: "auto",
+}));
 
 export function UserListContainer() {
   const { users, checkDm, socket } = useSocket();
@@ -11,16 +24,21 @@ export function UserListContainer() {
       checkDm(user.id);
     }
   }
-  return <>
-  <div style={{height:"100%", width:"20%", minWidth:"10rem", maxWidth:"14rem", padding:"14px 9px", backgroundColor:"lightsalmon", flex:"1 1 auto", overflowY:"auto"}}>
-    <label style={{fontSize:"14px", paddingLeft:"6px"}}>ONLINE - {users?.length}</label>
-    {users?.map((user, idx) => (
-        <div key={idx} className="flex items-center py-1 px-1 h-fit w-100 rounded-lg hover:bg-gray-800 hover:bg-opacity-20 hover:cursor-pointer"
-        onClick={() => handleClick(user)}>
-            <img src={avatars_url[user.avatar ?? 0]} alt="avatar" className="w-[40px] h-[40px] mr-2"/>
-            <label style={{textOverflow:"ellipsis"}}>{user.name}</label>
-        </div>
-    ))}
-  </div>
-  </>
+  return (
+    <UserListContainerWrapper>
+      <Typography variant="subtitle1" sx={{ fontSize: 14, fontWeight: 600, paddingLeft: 1 }}>
+        ONLINE - {users?.length}
+      </Typography>
+      <List sx={{ paddingTop:1 }}>
+        {users?.map((user, idx) => (
+          <ListItem key={idx} button onClick={() => handleClick(user)} disablePadding sx={{ borderRadius: '10px', '&:hover': { backgroundColor: '#E5E7EB' } }}>
+            <ListItemAvatar sx={{padding: 1}}>
+              <Avatar alt="avatar" src={avatars_url[user.avatar ?? 0]} sx={{ width: 40, height: 40 }} />
+            </ListItemAvatar>
+            <ListItemText primary={user.name} primaryTypographyProps={{ sx: { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" } }} />
+          </ListItem>
+        ))}
+      </List>
+    </UserListContainerWrapper>
+  );
 }
