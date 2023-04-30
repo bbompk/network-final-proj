@@ -5,6 +5,56 @@ import { faSmile, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../UserProvider";
 import { useSocket } from "../../SocketProvider"
 import { MessageInterface } from "../../../interfaces/MessageInterface";
+import styled from "@emotion/styled";
+
+const backgroundColor = "black";
+
+// border-top: 1px solid #d1d5db;
+const Container = styled("div")`
+    display: flex;
+    flex-direction: column;
+    background-color: ${backgroundColor};
+`;
+
+const InputContainer = styled("div")`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+`;
+
+const Input = styled("textarea")`
+    flex-grow: 1;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    border-radius: 999px;
+    background-color: #ffffff;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 16px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+`;
+
+const Button = styled("button")`
+    background-color: ${backgroundColor};
+    border: none;
+    padding: 0.5rem;
+    border-radius: 999px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+`;
 
 export default function ChatInput () {
     const { username, avatarIndex, room } = useUser();
@@ -45,25 +95,30 @@ export default function ChatInput () {
     }
 
 
-    return (<div>
-        <StickerSelector onSelect={handleSendSticker} show={showStickerSelector} className="realtive"/>
-        <div className="flex flex-row gap-6 justify-center w-full p-4 pb-6 bg-gray-600">
-            <textarea 
-            id="input-message" rows={1} 
-            className="flex  flex-grow w-ull p-2 rounded-md bg-gray-300" 
-            onKeyDown={(e) => {
-                if(e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSendMsg()
-                }
-            }}
-            />
-            <button onClick={handleSendMsg}> 
-                <FontAwesomeIcon icon={faPaperPlane} className="text-2xl text-gray-400 hover:text-gray-700 hover:cursor-pointer" />
-            </button>
-            <button onClick={() => setShowStickerSelector(!showStickerSelector)}>
-                <FontAwesomeIcon icon={faSmile} className="text-2xl text-gray-400 hover:text-gray-700 hover:cursor-pointer" />
-            </button>
-        </div>
-    </div>)
+    return (
+        <Container>
+            <StickerSelector onSelect={handleSendSticker} show={showStickerSelector} />
+            <InputContainer>
+                <Input
+                    id="input-message"
+                    rows={1}
+                    // value={message}
+                    placeholder="Type a message"
+                    // onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSendMsg();
+                        }
+                    }}
+                />
+                <Button onClick={handleSendMsg}>
+                    <FontAwesomeIcon icon={faPaperPlane} className="text-gray-400" />
+                </Button>
+                <Button onClick={() => setShowStickerSelector(!showStickerSelector)}>
+                    <FontAwesomeIcon icon={faSmile} className="text-gray-400" />
+                </Button>
+            </InputContainer>
+        </Container>
+    );
 }
