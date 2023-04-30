@@ -6,7 +6,12 @@ export function ChatRoomContainer() {
   const { messages } = useSocket();
   const { room } = useUser();
   return <>
-  <div style={{minWidth:"20rem", flex:"1 1 auto", backgroundColor:"#2E3440", overflowY:"auto"}}>
+  <div style={{
+    minWidth:"20rem", flex:"1 1 auto", overflowY:"auto",
+    // background: "linear-gradient(90deg, #2E3440, #4C566A)"
+    backgroundColor: "#2E3440"
+    // backgroundColor: "#f9fafb"
+  }}>
     {
       room !== "" 
       ? messages?.map((msg, idx) => (
