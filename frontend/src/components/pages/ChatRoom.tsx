@@ -37,7 +37,7 @@ export function ChatRoom() {
           <ChatRoomContainer/>
           <ChatInput/>
         </div>
-        <div style={{display: "flex", flexDirection: "column", height: "100vh"}}>
+        <div style={{display: "flex", flexDirection: "column", height: "100vh", backgroundColor: "#1A202C"}}>
           <TopBar/>
           <UserListContainer/>
         </div>
