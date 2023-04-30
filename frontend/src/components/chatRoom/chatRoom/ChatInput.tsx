@@ -75,9 +75,10 @@ export default function ChatInput () {
             sticker: -1,
         }
         console.log(msgObj);
-        console.log('sending msg to room ' + room);
+        console.log('submitting msg ');
         if(sendMessage) sendMessage(msgObj);
         (document.getElementById("input-message") as HTMLTextAreaElement).value = "";
+        
     }
 
     const handleSendSticker = (sticker: number) => {

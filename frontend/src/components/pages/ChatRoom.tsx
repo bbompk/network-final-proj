@@ -7,9 +7,6 @@ import ChatInput from "../chatRoom/chatRoom/ChatInput";
 import { useSocket } from "../SocketProvider";
 import { ChatNoti } from "../chatRoom/chatRoom/ChatNoti";
 import { useEffect, useState } from "react";
-import { MessageInterface } from "../../interfaces/MessageInterface";
-
-
 
 export function ChatRoom() {
   const { room } = useUser();

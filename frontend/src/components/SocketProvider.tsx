@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const SocketProvider = ({ children }: Props) => {
-  const { username, avatarIndex, room, changeRoom } = useUser();
+  const { username, avatarIndex, room, changeRoom, } = useUser();
   const [ socket, setSocket] = useState<any>(null);
   const [ chatRooms, setChatRooms] = useState<ChatRoomInterface[]>([]);
   const [ messages, setMessages] = useState<MessageInterface[]>([]);
@@ -107,6 +107,11 @@ export const SocketProvider = ({ children }: Props) => {
       setMessages((messages)=>[...messages, message]);
     })
 
+    socket.on("server-echoe-message", (message:MessageInterface)=>{
+      console.log(`new message!`);
+      setMessages((messages)=>[...messages, message]);
+    })
+
     socket.on("server-send-dm", ({message, senderId}: {message:MessageInterface, senderId:string})=>{
       console.log(`new dm!`)
       if(room == senderId) setMessages((messages)=>[...messages, message]);
@@ -130,6 +135,7 @@ export const SocketProvider = ({ children }: Props) => {
       socket.off("server-user-left-room");
       socket.off("server-room-left");
       socket.off("server-send-message");
+      socket.off("server-echoe-message");
       socket.off("server-send-dm");
       socket.off("server-echoe-dm");
     }

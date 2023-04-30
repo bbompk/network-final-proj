@@ -16,14 +16,11 @@ export default function Message({ msg } : Props) {
             </div>
             <div className={`flex flex-col w-full gap-y-2 px-2`}>
                 <div className="flex w-full items-center h-fit">
-                    <span className="text-md font-bold mr-2 ">
+                    <span className="text-md font-bold mr-2 text-white">
                         {msg.author?.name}
                     </span>
-                    <span className="text-[10px] text-gray-500 mr-px pt-[4px]">
-                        {dateToDateString(new Date(msg.timestamp ?? 0))}
-                    </span>
                     <span className="text-[10px] text-gray-500 pt-[4px]">
-                        {`at ${dateToTimeString(new Date(msg.timestamp ?? 0))}`}
+                        {`${dateToDateString(new Date(msg.timestamp ?? 0))} at ${dateToTimeString(new Date(msg.timestamp ?? 0))}`}
                     </span>
                 </div> 
                 <div className="flex w-full">

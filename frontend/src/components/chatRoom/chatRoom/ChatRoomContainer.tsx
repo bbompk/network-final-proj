@@ -1,12 +1,21 @@
 import Message from "./Message"
 import { useSocket } from "../../SocketProvider"
 import { useUser } from "../../UserProvider";
+import { useEffect } from "react";
 
 export function ChatRoomContainer() {
   const { messages } = useSocket();
   const { room } = useUser();
+
+  useEffect(()=>{
+    const isEchoeBack = messages && messages.length > 0 ? messages[messages.length -1].echoeBack : false;
+    console.log('ecc', isEchoeBack)
+    let chatContainer = document.getElementById("chat-messages-container");
+    if(chatContainer && isEchoeBack) chatContainer.scrollTop = chatContainer.scrollHeight;
+  },[messages])
+
   return <>
-  <div style={{
+  <div id="chat-messages-container" style={{
     minWidth:"20rem", flex:"1 1 auto", overflowY:"auto",
     // background: "linear-gradient(90deg, #2E3440, #4C566A)"
     backgroundColor: "#2E3440"

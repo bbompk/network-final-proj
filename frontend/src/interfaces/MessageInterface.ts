@@ -9,4 +9,5 @@ export interface MessageInterface {
     timestamp?: string | Date;
     isSticker?: boolean;
     sticker?: number;
+    echoeBack?: boolean;
 }

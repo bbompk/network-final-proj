@@ -38,6 +38,7 @@ export const UserProvider = ({ children }: Props) => {
     setAvatarIndex(newAvatarIndex);
     sessionStorage.setItem('avatarIndex', String(newAvatarIndex))
   }
+  
 
   return (
     <UserContext.Provider value={{username, changeUsername, room, changeRoom, avatarIndex, changeAvatarIndex}}>
