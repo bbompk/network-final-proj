@@ -25,12 +25,13 @@ export function ChatRoom() {
       {/* <TopBar/> */}
       <div style={{display:"flex", flexDirection:"row", height:"100vh"}}>
         <RoomListContainer/>
-        <div style={{display:"flex", flexDirection:"column", flexGrow:1, backgroundColor:"lightblue"}}>
-          <div>
+        <div style={{display:"flex", flexDirection:"column", flexGrow:1}}>
+          <div style={{display:"flex", alignItems:"center", fontSize:"20px", color:"white", padding:"8px 16px", backgroundColor:"#1E2532"}}>
             {room !== "" && (isDmRoom 
-            ? <label style={{fontSize:"14px", paddingLeft:"6px"}}>{(users?.find((u) => u.id === room))?.name ?? 'disconnected'}</label>
-            : <label style={{fontSize:"14px", paddingLeft:"6px"}}>ROOM - {room}</label>)}
+            ? <label style={{paddingLeft:"6px"}}>{(users?.find((u) => u.id === room))?.name ?? 'disconnected'}</label>
+            : <label style={{paddingLeft:"6px"}}>ROOM - {room}</label>)}
           </div>
+          <hr style={{border:"1px solid #1A202C"}}/>
           <ChatRoomContainer/>
           <ChatInput/>
         </div>

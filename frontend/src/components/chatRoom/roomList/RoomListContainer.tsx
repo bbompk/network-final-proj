@@ -12,19 +12,17 @@ export function RoomListContainer() {
   })
 
   return <>
-  <div style={{ display:"flex", flexDirection:"column", height:"100%", width:"20%", minWidth:"10rem", maxWidth:"14rem", flex:"1 1 auto", overflowY:"auto"}}>
+  <div style={{ display:"flex", flexDirection:"column", height:"100%", maxWidth:"15vw", minWidth:"200px", flex:"1 1 auto", overflowY:"auto", backgroundColor:"#1A202C"}}>
     <input 
       type="text" 
       id="search-room" 
       value={searchRoomInput} 
       onChange={e=>{setSearchRoomInput(e.target.value)}} 
       placeholder="Search room. . ." 
-      style={{ width:"100%", padding:"0.3rem", height:"3rem"}}
+      style={{ width:"calc(100% - 1rem)", padding:"0.3rem 1rem", margin:"0.5rem", height:"2.5rem", borderRadius:"0.5rem"}}
     />
-    <div 
-      style={{ flexGrow:1, display:"flex", flexDirection:"column", overflow:"auto", width:"100%"}}
-      className="bg-cyan-200"
-      >
+    <hr className="w-2/4 mx-auto border-slate-500"/>
+    <div style={{ flexGrow:1, display:"flex", flexDirection:"column", overflow:"auto", width:"100%"}}>
     {
       filteredChatRooms && filteredChatRooms.map((chatRoom,index)=>{
         return <div key={index}>

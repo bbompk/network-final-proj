@@ -9,8 +9,8 @@ export function RoomNameContainer({chatRoom}:{chatRoom:ChatRoomInterface}) {
   }
   return <>
     <button 
-      className="bg-cyan-200 hover:bg-cyan-300 hover:cursor-pointer"
-      style={{display:"inline-block", height:"3rem", minWidth:"100%", padding:"0.5rem", alignItems:"center", fontSize:"1.2rem", fontWeight:"bold" }}
+      className="hover:bg-slate-700 hover:cursor-pointer rounded-lg"
+      style={{display:"inline-block", width:"calc(100% - 1rem)", padding:"0.5rem", margin:"0.2rem 0.5rem", alignItems:"center", fontSize:"1.2rem", fontWeight:"bold", color:"white" }}
       onClick={onClick}
       >
       {chatRoom.roomName}
