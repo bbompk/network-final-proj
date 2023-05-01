@@ -9,7 +9,6 @@ export function ChatRoomContainer() {
 
   useEffect(()=>{
     const isEchoeBack = messages && messages.length > 0 ? messages[messages.length -1].echoeBack : false;
-    console.log('ecc', isEchoeBack)
     let chatContainer = document.getElementById("chat-messages-container");
     if(chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
   },[messages])

@@ -38,6 +38,9 @@ const errorHandler = (err, req, res, next) => {
     });
 };
 app.use(errorHandler);
+app.use('/', (req, res, next) => {
+    res.send("Hello World");
+})
 
 io.on('connection', (socket) => {
     console.log(`[${moment().format(date_time_format[0])}] client connected : ${socket.id}`)

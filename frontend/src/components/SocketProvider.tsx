@@ -6,6 +6,7 @@ import { ChatRoomInterface } from "../interfaces/ChatRoomInterface";
 import { io } from "socket.io-client";
 import { MessageInterface } from "../interfaces/MessageInterface";
 import { UserInterface } from "../interfaces/UserInterface";
+import { useNavigate } from "react-router-dom";
 
 const SocketContext = createContext<SocketContextInterface>({});
 
@@ -14,18 +15,26 @@ interface Props {
 }
 
 export const SocketProvider = ({ children }: Props) => {
+  const navigate = useNavigate();
   const { username, avatarIndex, room, changeRoom, } = useUser();
   const [ socket, setSocket] = useState<any>(null);
   const [ chatRooms, setChatRooms] = useState<ChatRoomInterface[]>([]);
   const [ messages, setMessages] = useState<MessageInterface[]>([]);
   const [ users, setUsers] = useState<UserInterface[]>([]);
-  const [isDmRoom, setIsDmRoom] = useState<boolean>(false);
-  const [notiDm, setNotiDm] = useState<MessageInterface>();
+  const [ isDmRoom, setIsDmRoom] = useState<boolean>(false);
+  const [ notiDm, setNotiDm] = useState<MessageInterface>();
 
   useEffect(()=>{
     console.log(username)
-    if(!username)return;
-    const s = io("http://localhost:2001", { transports: ["websocket"] });
+    if(!username) return;
+    const serverUrl = sessionStorage.getItem('serverUrl');
+    if(!serverUrl || serverUrl === ''){
+      console.log(serverUrl)
+      console.log('no server url')
+      navigate('/');
+      return;
+    }
+    const s = io(serverUrl, { transports: ["websocket"] });
     s.connect();
     console.log(s);
     setSocket(s);
@@ -167,13 +176,8 @@ export const SocketProvider = ({ children }: Props) => {
 
   function checkDm(roomName:string){
     console.log(`check dm ${roomName}...`)
-    socket.emit("client-join-room", {
-      roomName,
-      user:{
-        name:username,
-        avatar:avatarIndex
-      }
-    })
+    if(room) leaveRoom();
+    if(changeRoom) changeRoom(roomName);
     setIsDmRoom(true);
   }
 
