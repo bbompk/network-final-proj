@@ -107,7 +107,7 @@ export const SocketProvider = ({ children }: Props) => {
     socket.on("server-room-left", ({roomName}:{roomName:string})=>{
       console.log(`left room ${roomName} success!`);
       if(!changeRoom)return;
-      changeRoom("");
+      if(room == roomName) changeRoom("");
     })
 
     // catch new message
