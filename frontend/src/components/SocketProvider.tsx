@@ -176,9 +176,10 @@ export const SocketProvider = ({ children }: Props) => {
 
   function checkDm(roomName:string){
     console.log(`check dm ${roomName}...`)
-    if(room) leaveRoom();
+    if(!isDmRoom) leaveRoom();
     if(changeRoom) changeRoom(roomName);
     setIsDmRoom(true);
+    setMessages([]);
   }
 
   function leaveRoom(){
