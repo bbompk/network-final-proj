@@ -70,6 +70,7 @@ export const SocketProvider = ({ children }: Props) => {
     socket.on("server-user-disconnected",({data}:{data:UserInterface[]})=>{
       console.log("user disconnected!")
       setUsers(data);
+      console.log(data)
     })
 
     // catch newly created room 
